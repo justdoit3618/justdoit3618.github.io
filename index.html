@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Jinghui Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a192f;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            color: #64ffda;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shoot 3s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100%) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(200%) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title {
+            font-size: 3.5em;
+            margin-bottom: 1em;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 1s ease forwards;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+        }
+
+        .subtitle {
+            color: #8892b0;
+            font-size: 1.5em;
+            margin-bottom: 2em;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.3s forwards;
+        }
+
+        .launch-btn {
+            position: relative;
+            padding: 15px 40px;
+            border: 2px solid #64ffda;
+            background: transparent;
+            cursor: pointer;
+            outline: none;
+            font-size: 1.2em;
+            color: #64ffda;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.6s forwards;
+            border-radius: 4px;
+        }
+
+        .launch-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+        }
+
+        .options-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(10, 25, 47, 0.95);
+            padding: 2em;
+            border-radius: 8px;
+            border: 2px solid #64ffda;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 100;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .options-container.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 30px;
+            margin: 15px 0;
+            background: transparent;
+            border: 2px solid #64ffda;
+            color: #64ffda;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .option-btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 99;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 添加加载界面的样式 */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a192f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-text {
+            color: #64ffda;
+            font-size: 2em;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(100, 255, 218, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            width: 0%;
+            height: 100%;
+            background: #64ffda;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 添加加载界面（必须放在最前面） -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-text">LOADING</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stars"></div>
+    <div class="overlay"></div>
+    
+    <div class="options-container">
+        <h2 style="color: #64ffda; margin-bottom: 1.5em;">选择要访问的页面</h2>
+        <button class="option-btn" onclick="goToPage('https://justdoit3618.github.io/Cursor/Cursor.html')">Cursor介绍</button>
+        <button class="option-btn" onclick="goToPage('https://justdoit3618.github.io/JinghuiTechnology/景汇科技网.html')">景汇科技</button>
+
+    </div>
+
+    <div class="container">
+        <h1 class="title">Welcome to Jinghui Technology</h1>
+        <p class="subtitle">创新科技，引领未来</p>
+        <button class="launch-btn" onclick="showOptions()">ENTER →</button>
+    </div>
+
+    <script>
+        function createStarryBackground() {
+            const stars = document.querySelector('.stars');
+            const numStars = 200;
+            const numShootingStars = 5;
+
+            // 创建普星星
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const size = Math.random() * 2;
+                const duration = 2 + Math.random() * 3;
+                
+                star.style.cssText = `
+                    left: ${x}%;
+                    top: ${y}%;
+                    width: ${size}px;
+                    height: ${size}px;
+                    --duration: ${duration}s;
+                `;
+
+                stars.appendChild(star);
+            }
+
+            // 创建流星
+            for (let i = 0; i < numShootingStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                
+                // 修改这里：将 y 值设置在上方，x 值设置在右侧
+                const y = Math.random() * 20;  // 在屏幕顶部 0-20% 的位置
+                const width = 50 + Math.random() * 100;
+                
+                star.style.cssText = `
+                    top: ${y}%;
+                    right: 0;  // 设置在右侧
+                    width: ${width}px;
+                    animation-delay: ${Math.random() * 3}s;
+                `;
+
+                stars.appendChild(star);
+            }
+        }
+
+        window.addEventListener('load', createStarryBackground);
+
+        function showOptions() {
+            const container = document.querySelector('.container');
+            const overlay = document.querySelector('.overlay');
+            const optionsContainer = document.querySelector('.options-container');
+            
+            container.style.opacity = '0.5';
+            overlay.classList.add('show');
+            optionsContainer.classList.add('show');
+        }
+
+        function goToPage(url) {
+            const optionsContainer = document.querySelector('.options-container');
+            optionsContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                window.location.href = url;
+            }, 500);
+        }
+
+        document.querySelector('.overlay').addEventListener('click', function() {
+            const container = document.querySelector('.container');
+            const overlay = document.querySelector('.overlay');
+            const optionsContainer = document.querySelector('.options-container');
+            
+            container.style.opacity = '1';
+            overlay.classList.remove('show');
+            optionsContainer.classList.remove('show');
+        });
+
+        // 添加加载动画函数
+        function simulateLoading() {
+            const progress = document.querySelector('.loading-progress');
+            const loadingScreen = document.querySelector('.loading-screen');
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 800);
+                    }, 500);
+                } else {
+                    width += Math.random() * 15;
+                    if (width > 100) width = 100;
+                    progress.style.width = width + '%';
+                }
+            }, 200);
+        }
+
+        // 修改页面加载事件
+        window.addEventListener('load', () => {
+            simulateLoading();  // 先执行加载动画
+            createStarryBackground();  // 然后创建星空背景
+        });
+    </script>
+</body>
+</html>
