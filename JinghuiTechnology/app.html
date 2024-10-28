@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP编程 - 景汇科技</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #FFF0E6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 0 20px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2em;
+            margin-bottom: 2em;
+            box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+        }
+        h2 {
+            color: #ff5e62;
+            border-bottom: 2px solid #ff9966;
+            padding-bottom: 0.5em;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.7em 1.5em;
+            background-color: #ff9966;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #ff5e62;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>APP编程</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>什么是APP编程？</h2>
+            <p>APP编程是指为移动设备（如智能手机和平板电脑）创建应用程序的过程。这包括设计用户界面、编写代码、测试和部署应用程序。APP编程涵盖了多个平台，主要包括Android和iOS。</p>
+        </div>
+
+        <div class="section">
+            <h2>Android程序设计介绍</h2>
+            <p>Android是Google开发的开源移动操作系统。Android程序设计通常使用Java或Kotlin编程语言，并利用Android SDK（软件开发工具包）来开发应用。以下是Android开发的一些关键点：</p>
+            <ul>
+                <li>使用Android Studio作为主要开发环境</li>
+                <li>学习Activity、Fragment、Service等Android组件</li>
+                <li>掌握XML布局设计</li>
+                <li>了解Android生命周期</li>
+                <li>学习数据存储和网络通信</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>iOS程序设计介绍</h2>
+            <p>iOS是Apple公司开发的移动操作系统，用于iPhone和iPad等设备。iOS应用开发主要使用Swift或Objective-C语言。以下是iOS开发的一些要点：</p>
+            <ul>
+                <li>使用Xcode作为主要开发环境</li>
+                <li>学习UIKit框架</li>
+                <li>掌握Storyboard和Auto Layout</li>
+                <li>了解iOS应用生命周期</li>
+                <li>学习Core Data进行数据管理</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>跨平台APP开发</h2>
+            <p>除了原生开发，还有一些跨平台的APP开发方法，可以同时开发Android和iOS应用：</p>
+            <ul>
+                <li>React Native：使用JavaScript和React</li>
+                <li>Flutter：使用Dart语言</li>
+                <li>Xamarin：使用C#语言</li>
+            </ul>
+            <p>这些跨平台工具可以大大提高开发效率，但在某些特定功能上可能不如原生开发灵活。</p>
+        </div>
+
+        <div class="section">
+            <h2>APP开发基础技能</h2>
+            <p>无论选择哪种平台或开发方法，以下技能对APP开发者都很重要：</p>
+            <ul>
+                <li>编程基础（如面向对象编程）</li>
+                <li>用户界面（UI）和用户体验（UX）设计</li>
+                <li>数据库知识</li>
+                <li>API的使用和集成</li>
+                <li>版本控制（如Git）</li>
+                <li>测试和调试技巧</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>样例项目</h2>
+            <p>以下是一些基本的Android应用开发示例，适合初学者练习：</p>
+            <ul>
+                <li>Hello World应用：学习基本的UI创建和事件处理</li>
+                <li>简单计算器：练习基本的算术运算和用户输入处理</li>
+                <li>待办事项列表：学习数据存储和列表视图的使用</li>
+                <li>天气预报应用：练习网络请求和JSON数据解析</li>
+                <li>简单游戏（如猜数字）：综合运用各种Android开发技能</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>APP比赛</h2>
+            <p>参加APP开发比赛是展示创意和技能的绝佳机会。以下是一些知名的比赛：</p>
+            <ul>
+                <li>Google Play学生应用挑战赛：面向学生开发者的全球性比赛</li>
+                <li>全国大学生移动应用创新大赛：国内大型APP开发竞赛</li>
+                <li>华为开发者大赛：涵盖多个技术领域的综合性比赛</li>
+                <li>Apple WWDC学生挑战赛：面向学生的Swift编程挑战</li>
+            </ul>
+            <p>这些比赛不仅可以提升你的技术能力，还能帮助你建立人脉，甚至获得实习或工作机会。</p>
+        </div>
+
+        <a href="景汇科技网.html" class="back-button">返回主页</a>
+    </div>
+</body>
+</html>
