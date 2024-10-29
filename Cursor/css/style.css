@@ -1,0 +1,573 @@
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: transparent;
+    margin: 0;
+    overflow: hidden;
+}
+
+.section {
+    text-align: center;
+    position: relative;
+    height: 100vh;
+    background: transparent !important;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 245, 160, 0.15);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    border-radius: 15px;
+}
+
+/* 标题样式 */
+h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(120deg, #00F5A0, #00D9F5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 245, 160, 0.3);
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: #00D9F5;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 217, 245, 0.3);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #7A88FF;
+    text-shadow: 0 0 8px rgba(122, 136, 255, 0.3);
+}
+
+.speaker {
+    color: #00F5A0;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+/* 链接样式 */
+.download-link, .watt-link {
+    text-decoration: none;
+    color: #00D9F5;
+    transition: all 0.3s;
+    position: relative;
+    padding: 5px 10px;
+}
+
+.download-link:hover, .watt-link:hover {
+    color: #00F5A0;
+    text-shadow: 0 0 10px rgba(0, 245, 160, 0.5);
+}
+
+.download-link::after, .watt-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #00F5A0, #00D9F5);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.download-link:hover::after, .watt-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* 使用项目样式 */
+.usage-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.usage-item {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(122, 136, 255, 0.2);
+    transition: all 0.3s;
+}
+
+.usage-item:hover {
+    transform: translateY(-5px);
+    border-color: #00F5A0;
+    box-shadow: 0 5px 15px rgba(0, 245, 160, 0.2);
+}
+
+.usage-title h3 {
+    color: #00D9F5;
+    margin: 10px 0;
+}
+
+.usage-item p {
+    color: #7A88FF;
+}
+
+.shortcut-list p {
+    color: #7A88FF;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.shortcut-list p:hover {
+    background: rgba(0, 245, 160, 0.1);
+    color: #00F5A0;
+}
+
+/* 账号说明样式优化 */
+.account-info {
+    text-align: left;
+    padding: 20px;
+}
+
+.account-info p {
+    margin: 15px 0;
+    font-size: 1.1rem;
+    color: #7A88FF;
+    padding: 10px;
+    border-left: 3px solid #00F5A0;
+    background: rgba(0, 245, 160, 0.05);
+    transition: all 0.3s;
+}
+
+.account-info p:hover {
+    background: rgba(0, 245, 160, 0.1);
+    transform: translateX(5px);
+}
+
+/* 下载信息样式优化 */
+.download-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.download-item {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.download-item:hover {
+    transform: translateY(-5px);
+}
+
+/* 示例容器样式优化 */
+.example-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.example-preview {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(122, 136, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    margin-bottom: 10px;
+}
+
+.preview-header {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.preview-title {
+    color: #00D9F5;
+}
+
+.preview-content {
+    padding: 15px;
+}
+
+.preview-content img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.view-demo-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #00F5A0, #00D9F5);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 217, 245, 0.3);
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.view-demo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 245, 160, 0.4);
+    background: linear-gradient(45deg, #00D9F5, #00F5A0);
+}
+
+.btn-arrow {
+    margin-left: 5px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .download-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* 添加内容框发光效果 */
+.content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 245, 160, 0.15);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    border-radius: 15px;
+}
+
+.content:hover {
+    transform: translate(-50%, -50%) scale(1.02);
+}
+
+/* 添加动画关键帧 */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px rgba(0, 245, 160, 0.3);
+    }
+    50% {
+        text-shadow: 0 0 20px rgba(0, 217, 245, 0.5);
+    }
+    100% {
+        text-shadow: 0 0 10px rgba(0, 245, 160, 0.3);
+    }
+}
+
+/* 应用动画到标题 */
+h1, h2 {
+    animation: glow 3s infinite;
+}
+
+/* 修改说明文字样式 */
+.example-container > p {
+    color: #7A88FF;
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+/* 添加背景相关样式 */
+.particles-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a, #0a192f);
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    background: rgba(0, 245, 160, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.line {
+    position: absolute;
+    background: linear-gradient(90deg, rgba(0, 245, 160, 0.2), rgba(0, 217, 245, 0.2));
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 修改内容框样式以适应新背景 */
+.content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 245, 160, 0.15);
+}
+
+/* 添加网格纹理 */
+.particles-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 245, 160, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 160, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+}
+
+/* 添加扫描线效果 */
+.particles-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 0%,
+        rgba(0, 245, 160, 0.1) 50%,
+        transparent 100%
+    );
+    animation: scan 8s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+/* 调整文字颜色以适应深色背景 */
+.subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 10px rgba(0, 245, 160, 0.5);
+}
+
+.account-info p {
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 245, 160, 0.1);
+}
+
+.usage-item p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 加载界面样式 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1a1a1a, #0a192f);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #00F5A0;
+    text-shadow: 0 0 20px rgba(0, 245, 160, 0.5);
+    margin-bottom: 1rem;
+    letter-spacing: 8px;
+    animation: glitch 1s infinite;
+}
+
+.loading-subtitle {
+    font-size: 1.2rem;
+    color: #00D9F5;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+}
+
+.loading-bar-container {
+    width: 300px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00F5A0, #00D9F5);
+    border-radius: 2px;
+    transition: width 0.3s ease-out;
+    position: relative;
+}
+
+.loading-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: loading-shine 1.5s infinite;
+}
+
+.loading-percentage {
+    font-size: 1rem;
+    color: #7A88FF;
+    margin-top: 1rem;
+}
+
+/* 加载动画 */
+@keyframes loading-shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 #00F5A0, -0.05em -0.025em 0 #00D9F5;
+    }
+    14% {
+        text-shadow: 0.05em 0 0 #00F5A0, -0.05em -0.025em 0 #00D9F5;
+    }
+    15% {
+        text-shadow: -0.05em -0.025em 0 #00F5A0, 0.025em 0.025em 0 #00D9F5;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #00F5A0, 0.025em 0.025em 0 #00D9F5;
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 #00F5A0, 0.05em 0 0 #00D9F5;
+    }
+    99% {
+        text-shadow: 0.025em 0.05em 0 #00F5A0, 0.05em 0 0 #00D9F5;
+    }
+    100% {
+        text-shadow: -0.025em 0 0 #00F5A0, -0.025em -0.025em 0 #00D9F5;
+    }
+}
+
+/* 隐藏初始内容 */
+#fullpage {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* 添加全屏提示框样式 */
+.fullscreen-prompt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(26, 32, 44, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 245, 160, 0.2);
+    border: 1px solid rgba(0, 245, 160, 0.3);
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    transition: opacity 0.5s ease;
+}
+
+.prompt-content {
+    text-align: center;
+}
+
+.prompt-content h2 {
+    font-size: 1.5rem;
+    color: #00F5A0;
+    margin-bottom: 25px;
+    animation: none;  /* 移除标题动画 */
+}
+
+.prompt-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.prompt-buttons button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.enter-button {
+    background: linear-gradient(45deg, #00F5A0, #00D9F5);
+    color: white;
+    font-weight: bold;
+}
+
+.enter-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 245, 160, 0.4);
+}
+
+.cancel-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: #7A88FF;
+    border: 1px solid rgba(122, 136, 255, 0.3) !important;
+}
+
+.cancel-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

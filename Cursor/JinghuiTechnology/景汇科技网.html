@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>景汇科技</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f9fc;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3em 0;
+            box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 0.5em;
+            opacity: 0.9;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+            padding: 3em 1em;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .item {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 7px 30px -10px rgba(150,170,180,0.5);
+            transition: all 0.3s ease;
+            width: 22%;
+            padding: 1.5em;
+            text-align: center;
+        }
+        .item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 14px 60px -18px rgba(150,170,180,0.7);
+        }
+        .icon {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .item:hover .icon {
+            transform: scale(1.1);
+        }
+        .item h3 {
+            font-size: 1.4em;
+            margin: 0.5em 0;
+            color: #4a4a4a;
+        }
+        .description {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #666;
+            margin-bottom: 1em;
+        }
+        .learn-more {
+            display: inline-block;
+            padding: 0.5em 1em;
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .learn-more:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+        footer {
+            background-color: #4a4a4a;
+            color: white;
+            text-align: center;
+            padding: 1.5em;
+            margin-top: 2em;
+        }
+        .robot-bg { background-color: #E6F3FF; }
+        .app-bg { background-color: #FFF0E6; }
+        .print-bg { background-color: #E6FFE6; }
+        .python-bg { background-color: #FFE6E6; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>景汇科技</h1>
+        <div class="subtitle">探索科技，创造未来</div>
+    </header>
+    <div class="container">
+        <div class="item robot-bg">
+            <img src="机器人社.png" alt="机器人社" class="icon">
+            <h3>机器人社</h3>
+            <p class="description">探索机器人技术的前沿，培养未来的机器人工程师。</p>
+            <a href="robot.html" class="learn-more">了解更多</a>
+        </div>
+        <div class="item app-bg">
+            <img src="app编程.png" alt="APP编程" class="icon">
+            <h3>APP编程</h3>
+            <p class="description">学习移动应用开发，创造改变世界的APP。</p>
+            <a href="app.html" class="learn-more">了解更多</a>
+        </div>
+        <div class="item print-bg">
+            <img src="3D打印.png" alt="3D打印" class="icon">
+            <h3>3D打印</h3>
+            <p class="description">体验3D打印技术，将创意变为现实。</p>
+            <a href="3d.html" class="learn-more">了解更多</a>
+        </div>
+        <div class="item python-bg">
+            <img src="python爬虫.png" alt="Python爬虫" class="icon">
+            <h3>Python爬虫</h3>
+            <p class="description">掌握Python爬虫技术，获取和分析海量数据。</p>
+            <a href="python.html" class="learn-more">了解更多</a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 景汇科技 版权所有</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python爬虫 - 景汇科技</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #FFE6E6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            text-align: center;
+            padding: 2em 0;
+            box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 0 20px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2em;
+            margin-bottom: 2em;
+            box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+        }
+        h2 {
+            color: #ff416c;
+            border-bottom: 2px solid #ff416c;
+            padding-bottom: 0.5em;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .back-button {
+            display: inline-block;
+            margin-top: 1em;
+            padding: 0.7em 1.5em;
+            background-color: #ff416c;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #ff4b2b;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Python爬虫</h1>
+    </header>
+    <div class="container">
+        <div class="section">
+            <h2>什么是Python爬虫？</h2>
+            <p>Python爬虫是使用Python编程语言编写的自动化程序，用于从网站上提取数据。爬虫可以访问网页，解析其内容，并从中提取有用的信息。这种技术广泛应用于数据分析、市场研究、价格监控等领域。</p>
+        </div>
+
+        <div class="section">
+            <h2>爬虫库介绍</h2>
+            <p>Python有多个用于网络爬虫的库，其中最常用的包括：</p>
+            <ul>
+                <li><strong>requests</strong>：用于发送HTTP请求，简单易用。</li>
+                <li><strong>BeautifulSoup</strong>：用于解析HTML和XML文件，提取数据变得轻而易举。</li>
+                <li><strong>Scrapy</strong>：一个强大的爬虫框架，适合大规模爬虫项目。</li>
+                <li><strong>Selenium</strong>：用于自动化网页操作，特别适合需要JavaScript渲染的网页。</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>爬虫的基本步骤</h2>
+            <ol>
+                <li>发送HTTP请求获取网页内容</li>
+                <li>解析HTML或XML文档</li>
+                <li>提取所需的数据</li>
+                <li>存储数据（如保存到文件或数据库）</li>
+                <li>处理异常和错误</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>爬取百度图片的简单案例</h2>
+            <p>以下是一个使用requests和BeautifulSoup库爬取百度图片的简单示例：</p>
+            <pre>
+import requests
+from bs4 import BeautifulSoup
+import os
+
+def download_baidu_images(keyword, num_images=10):
+    url = f"https://image.baidu.com/search/index?tn=baiduimage&word={keyword}"
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
+    
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    img_tags = soup.find_all('img', class_='main_img')
+    
+    if not os.path.exists(keyword):
+        os.makedirs(keyword)
+    
+    for i, img in enumerate(img_tags[:num_images]):
+        img_url = img['src']
+        img_data = requests.get(img_url).content
+        with open(f"{keyword}/{keyword}_{i+1}.jpg", 'wb') as f:
+            f.write(img_data)
+        print(f"Downloaded image {i+1}")
+
+download_baidu_images("猫咪", 5)
+            </pre>
+            <p>注意：在实际使用时，请遵守网站的使用条款和版权规定。</p>
+        </div>
+
+        <div class="section">
+            <h2>爬虫的应用领域</h2>
+            <ul>
+                <li>电子商务：价格比较、产品信息收集</li>
+                <li>社交媒体分析：舆情监测、用户行为分析</li>
+                <li>新闻聚合：自动收集和整理新闻文章</li>
+                <li>学术研究：大规模数据收集和分析</li>
+                <li>求职信息：自动收集和分析招聘信息</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>爬虫的法律和道德问题</h2>
+            <p>在使用爬虫时，需要注意以下几点：</p>
+            <ul>
+                <li>尊重网站的robots.txt文件</li>
+                <li>不要过度频繁地访问网站，以免给服务器造成压力</li>
+                <li>遵守网站的使用���款和版权规定</li>
+                <li>保护用户隐私，不要收集个人敏感信息</li>
+                <li>使用爬取的数据时要注明来源</li>
+            </ul>
+        </div>
+        
+        <a href="景汇科技网.html" class="back-button">返回主页</a>
+    </div>
+</body>
+</html>
