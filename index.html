@@ -22,7 +22,7 @@
             color: #64ffda;
         }
 
-        .stars {
+        .matrix-background {
             position: fixed;
             top: 0;
             left: 0;
@@ -32,41 +32,23 @@
             pointer-events: none;
         }
 
-        .star {
+        #matrix {
             position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite ease-in-out;
-        }
-
-        .shooting-star {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, #fff, transparent);
-            animation: shoot 3s ease-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        @keyframes shoot {
-            0% {
-                transform: translateX(-100%) rotate(-45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(200%) rotate(-45deg);
-                opacity: 0;
-            }
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
         }
 
         .container {
-            text-align: center;
             position: relative;
             z-index: 2;
+            background: rgba(10, 25, 47, 0.3);
+            padding: 2em;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            text-align: center;
         }
 
         .title {
@@ -76,6 +58,8 @@
             transform: translateY(-20px);
             animation: fadeIn 1s ease forwards;
             text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+            text-align: center;
+            width: 100%;
         }
 
         .subtitle {
@@ -84,6 +68,8 @@
             margin-bottom: 2em;
             opacity: 0;
             animation: fadeIn 1s ease 0.3s forwards;
+            text-align: center;
+            width: 100%;
         }
 
         .launch-btn {
@@ -223,6 +209,13 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+
+        .loading-percentage {
+            color: #64ffda;
+            font-size: 1.2em;
+            margin-top: 10px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -233,16 +226,20 @@
             <div class="loading-bar">
                 <div class="loading-progress"></div>
             </div>
+            <div class="loading-percentage">0%</div>
         </div>
     </div>
 
-    <div class="stars"></div>
+    <div class="matrix-background">
+        <canvas id="matrix"></canvas>
+    </div>
+
     <div class="overlay"></div>
     
     <div class="options-container">
         <h2 style="color: #64ffda; margin-bottom: 1.5em;">选择要访问的页面</h2>
-        <button class="option-btn" onclick="goToPage('https://justdoit3618.github.io/Cursor/Cursor.html')">Cursor介绍</button>
-        <button class="option-btn" onclick="goToPage('https://justdoit3618.github.io/JinghuiTechnology/景汇科技网.html')">景汇科技</button>
+        <button class="option-btn" onclick="goToPage('Cursor/Cursor.html')">Cursor介绍</button>
+        <button class="option-btn" onclick="goToPage('Cursor/JinghuiTechnology/景汇科技网.html')">景汇科技</button>
 
     </div>
 
@@ -253,53 +250,65 @@
     </div>
 
     <script>
-        function createStarryBackground() {
-            const stars = document.querySelector('.stars');
-            const numStars = 200;
-            const numShootingStars = 5;
+        function initMatrix() {
+            const canvas = document.getElementById('matrix');
+            const ctx = canvas.getContext('2d');
 
-            // 创建普星星
-            for (let i = 0; i < numStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                const size = Math.random() * 2;
-                const duration = 2 + Math.random() * 3;
-                
-                star.style.cssText = `
-                    left: ${x}%;
-                    top: ${y}%;
-                    width: ${size}px;
-                    height: ${size}px;
-                    --duration: ${duration}s;
-                `;
+            // 设置canvas尺寸为窗口大小
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
 
-                stars.appendChild(star);
+            // 修改字符集，删除表情符号
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%^&*<>[]{}+-=~';
+            const charSize = 14;
+            const columns = canvas.width / charSize;
+            const drops = [];
+
+            // 初始化每列的Y位置
+            for(let i = 0; i < columns; i++) {
+                drops[i] = 1;
             }
 
-            // 创建流星
-            for (let i = 0; i < numShootingStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'shooting-star';
-                
-                // 修改这里：将 y 值设置在上方，x 值设置在右侧
-                const y = Math.random() * 20;  // 在屏幕顶部 0-20% 的位置
-                const width = 50 + Math.random() * 100;
-                
-                star.style.cssText = `
-                    top: ${y}%;
-                    right: 0;  // 设置在右侧
-                    width: ${width}px;
-                    animation-delay: ${Math.random() * 3}s;
-                `;
+            // 绘制矩阵雨
+            function draw() {
+                // 半透明黑色背景，形成拖尾效果
+                ctx.fillStyle = 'rgba(10, 25, 47, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                stars.appendChild(star);
+                // 设置文字样式
+                ctx.fillStyle = '#64ffda';
+                ctx.font = charSize + 'px monospace';
+
+                // 绘制字符
+                for(let i = 0; i < drops.length; i++) {
+                    // 随机字符
+                    const char = chars[Math.floor(Math.random() * chars.length)];
+                    
+                    // 绘制字符
+                    ctx.fillText(char, i * charSize, drops[i] * charSize);
+
+                    // 字符到底部后随机重置到顶部
+                    if(drops[i] * charSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+
+                    // 递增Y坐标
+                    drops[i]++;
+                }
             }
+
+            // 动画循环
+            function animate() {
+                draw();
+                requestAnimationFrame(animate);
+            }
+
+            animate();
         }
-
-        window.addEventListener('load', createStarryBackground);
 
         function showOptions() {
             const container = document.querySelector('.container');
@@ -316,7 +325,15 @@
             optionsContainer.style.opacity = '0';
             
             setTimeout(() => {
-                window.location.href = url;
+                window.open(url, '_blank'); // 在新标签页打开链接
+                // 关闭选项菜单
+                const container = document.querySelector('.container');
+                const overlay = document.querySelector('.overlay');
+                
+                container.style.opacity = '1';
+                overlay.classList.remove('show');
+                optionsContainer.classList.remove('show');
+                optionsContainer.style.opacity = '1';
             }, 500);
         }
 
@@ -334,21 +351,30 @@
         function simulateLoading() {
             const progress = document.querySelector('.loading-progress');
             const loadingScreen = document.querySelector('.loading-screen');
+            const percentageText = document.querySelector('.loading-percentage');
+            const mainContent = document.querySelector('.container');
             let width = 0;
+            
+            // 初始隐藏主内容
+            mainContent.style.display = 'none';
             
             const interval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(interval);
+                    percentageText.textContent = '100%';
                     setTimeout(() => {
                         loadingScreen.style.opacity = '0';
                         setTimeout(() => {
                             loadingScreen.style.display = 'none';
+                            // 显示主内容
+                            mainContent.style.display = 'block';
                         }, 800);
                     }, 500);
                 } else {
                     width += Math.random() * 15;
                     if (width > 100) width = 100;
                     progress.style.width = width + '%';
+                    percentageText.textContent = Math.round(width) + '%';
                 }
             }, 200);
         }
@@ -356,7 +382,7 @@
         // 修改页面加载事件
         window.addEventListener('load', () => {
             simulateLoading();  // 先执行加载动画
-            createStarryBackground();  // 然后创建星空背景
+            initMatrix();       // 初始化矩阵动画
         });
     </script>
 </body>
